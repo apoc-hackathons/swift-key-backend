@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const getReviews_1 = require("../../controllers/reviews/getReviews");
+const postReviews_1 = require("../../controllers/reviews/postReviews");
+const patchReviews_1 = require("../../controllers/reviews/patchReviews");
+const deleteReviews_1 = require("../../controllers/reviews/deleteReviews");
+const multer_1 = require("../../middleware/multer");
+const reviewRouter = (0, express_1.Router)();
+reviewRouter.get('/', getReviews_1.getReviews);
+reviewRouter.post('/', multer_1.upload.fields([{ name: 'image', maxCount: 3 }]), postReviews_1.postReview);
+reviewRouter.patch('/:id', patchReviews_1.patchReview);
+reviewRouter.delete('/:id', deleteReviews_1.deleteReview);
+exports.default = reviewRouter;
